@@ -2,7 +2,7 @@ import os
 import sys
 # [GP] - reset the path. 06/02/2024
 # sys.path.append("..")
-sys.path.append(os.path.expanduser("~/QC-LinkPrediction-WIP/src/gnn_methods/HeaRT/benchmarking"))
+sys.path.append(os.path.expanduser("~/QC-LinkPrediction/src/gnn_methods/HeaRT/benchmarking"))
 
 import torch
 import argparse

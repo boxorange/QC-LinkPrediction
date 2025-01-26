@@ -153,10 +153,6 @@ def apply_svd_and_generate_embeds(time_decayed_matrices, embedding_size, n_top_d
 
 
 def apply_time_decay(matrices_by_year, decay_rate=0.2):
-    """
-    generated code by MS Co-Pilot. 05/28/2024
-    
-    """
     stacked_matrices = {}
     for year, matrices in matrices_by_year.items():
         for mat_type, matrix in matrices.items():
@@ -226,7 +222,7 @@ def main():
     n_top_dimensions_to_remove = 0 # the number of top dimensions to remove in SVD.
     
     # SEMNET concept list file.
-    concept_file = os.path.expanduser("~/QC-LinkPrediction-WIP/data/SEMNET/arxiv_qc_semnet_keywords_2024.txt")
+    concept_file = os.path.expanduser("~/QC-LinkPrediction/data/SEMNET/arxiv_qc_semnet_keywords_2024.txt")
     
     # LLM embedding file list.
     llm_embed_file_path_list = [
@@ -235,7 +231,7 @@ def main():
         os.path.expanduser("~/QC-LinkPrediction/data/SEMNET/embeds/tsv/Mixtral-8x7B-Instruct-v0.1_embedding.tsv"),
     ]
     
-    td_emb_dir = "~/QC-LinkPrediction-WIP/data/SEMNET/embeds/tsv"
+    td_emb_dir = "~/QC-LinkPrediction/data/SEMNET/embeds/tsv"
 
     # read the corpus. 
     corpus = json.load(open(corpus_file)) 

@@ -33,58 +33,20 @@ class Quantum(InMemoryDataset):
         elif split == 'test':
             self.load(self.processed_paths[2])
 
-    # @property
-    # def raw_dir(self) -> str:
-        # return osp.join(self.root, self.name, 'raw')
-
     @property
     def processed_dir(self) -> str:
-        # return osp.join(self.root, self.name, 'processed')
         return self.raw_data_paths['processed_dir']
 
 
     @property
     def raw_file_names(self) -> List[str]:
-        # names = ['yr_now_concept_2012.tsv', 'yr_now_cooccurrence_2012_train.tsv', 'yr_now_cooccurrence_2012_val.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['yr_now_concept_2012.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['none_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['palm_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['gemini_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['Llama-2-70b-chat-hf_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['mpt-30b-chat_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['Mixtral-8x7B-Instruct-v0.1_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['mean_pooled_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['max_pooled_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['gemini_sum_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # return [f'{name}.npz' for name in names]
-        
-        
-        # names = ['gemini_keyword_embedding.tsv', 'yr_now_cooccurrence_2012_train.tsv', 'yr_now_cooccurrence_2012_val.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['gemini_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['none_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['llm_blender_keyword_embedding_4.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['Meta-Llama-3-70B_keyword_embedding_4.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        # names = ['gemini_time_decay_keyword_embedding.tsv', 'yr_now_cooccurrence_2012.tsv', 'cooccurrence_2012_2017.tsv']
-        
         names = [self.raw_data_paths['embed_path'], self.raw_data_paths['train_data_path'], self.raw_data_paths['valid_data_path'], self.raw_data_paths['test_data_path']]
-        
-        
         return names
 
     @property
     def processed_file_names(self) -> List[str]:
         return ['train_data.pt', 'valid_data.pt', 'test_data.pt']
-        # return ['train_data.pt', 'test_data.pt']
-        # return ['now_data.pt', 'delta_data.pt']
-    
-    '''
-    def download(self) -> None:
-        for f in self.raw_file_names[:2]:
-            download_url(f'{self.url}/new_data/{self.name}/{f}', self.raw_dir)
-        for f in self.raw_file_names[2:]:
-            download_url(f'{self.url}/splits/{f}', self.raw_dir)
-    '''
-    
+
     def process(self) -> None:
         with open(self.raw_paths[0], 'r') as f:
             lines = f.read().split('\n')[:-1]
